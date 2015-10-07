@@ -37,14 +37,25 @@
             android:layout_below="@id/homely_icon"
             android:layout_centerHorizontal="true" />
 
-        <com.facebook.login.widget.LoginButton
+        <!--<com.facebook.login.widget.LoginButton-->
+            <!--android:id="@+id/authButton"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_below="@+id/create_account"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_centerHorizontal="true" />-->
+
+        <Button
             android:id="@+id/authButton"
+            android:text="Login with Facebook"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_below="@+id/create_account"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:background="#3b5998"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/create_account" />
 
     </RelativeLayout>
 
