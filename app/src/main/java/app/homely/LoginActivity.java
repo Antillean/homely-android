@@ -32,8 +32,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.util.List;
 
@@ -43,6 +48,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
+    protected CallbackManager callbackManager;
+
     public final static String FACEBOOK_ID = "com.homely.FACEBOOK_ID";
 
     @Override
@@ -50,15 +57,36 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_login);
+
+        LoginButton logInButton = (LoginButton) findViewById(R.id.authButton);
+        logInButton.setReadPermissions("user_friends");
+        logInButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Intent recipientListIntent = new Intent(LoginActivity.this, RecipientListActivity.class);
+                recipientListIntent.putExtra(FACEBOOK_ID, "kamalwood");
+                startActivity(recipientListIntent);
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
     }
 
-    public void logIn(View view) {
-        Button logInButton = (Button) findViewById(R.id.authButton);
-        Intent recipientListIntent = new Intent(this, RecipientListActivity.class);
-        recipientListIntent.putExtra(FACEBOOK_ID, "kamalwood");
-        startActivity(recipientListIntent);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
