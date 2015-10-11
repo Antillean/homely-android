@@ -33,6 +33,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.List;
 
@@ -58,5 +59,21 @@ public class LoginActivity extends AppCompatActivity {
         Intent recipientListIntent = new Intent(this, RecipientListActivity.class);
         recipientListIntent.putExtra(FACEBOOK_ID, "kamalwood");
         startActivity(recipientListIntent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events for Facebook.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event for Facebook.
+        AppEventsLogger.deactivateApp(this);
     }
 }
