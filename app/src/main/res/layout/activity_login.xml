@@ -49,13 +49,14 @@
         <Button
             android:id="@+id/authButton"
             android:text="Login with Facebook"
-            android:layout_width="250dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
             android:background="#3b5998"
             android:textColor="#FFFFFF"
-            android:layout_below="@+id/create_account" />
+            android:layout_below="@+id/create_account"
+            android:onClick="logIn"/>
 
     </RelativeLayout>
 

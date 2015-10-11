@@ -16,4 +16,6 @@
 
     <!-- Facebook-->
     <string name="facebook_app_id">1114669551884295</string>
+    <string name="title_recipient_list">Recipients</string>
+    <string name="title_recipient_detail">Recipient Detail</string>
 </resources>
